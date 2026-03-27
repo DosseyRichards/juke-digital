@@ -46,7 +46,7 @@ function DashboardInner({ children }: { children: React.ReactNode }) {
         }`}
       >
         <div className="flex items-center gap-2 px-6 py-5 border-b border-[var(--border)]">
-          <img src="/juke-digital-logo.png" alt="Juke Digital" className="w-10 h-10 rounded-lg object-contain" />
+          <img src="/juke-digital-logo.png" alt="Juke Digital" className="w-20 h-20 rounded-xl object-contain" />
         </div>
 
         {/* Venue switcher */}
