@@ -7,7 +7,6 @@ export default function HomePage() {
       <nav className="flex items-center justify-between px-6 py-4 border-b border-[var(--border)]">
         <div className="flex items-center gap-2">
           <img src="/juke-digital-logo.png" alt="Juke Digital" className="w-10 h-10 rounded-lg object-contain" />
-          <span className="text-xl font-bold">Juke Digital</span>
         </div>
         <div className="flex items-center gap-4">
           <Link href="/login" className="text-[var(--muted)] hover:text-white transition">
