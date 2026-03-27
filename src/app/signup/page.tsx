@@ -42,9 +42,7 @@ export default function SignupPage() {
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
           <Link href="/" className="inline-flex items-center gap-2 mb-6">
-            <div className="w-8 h-8 bg-[var(--primary)] rounded-lg flex items-center justify-center font-bold text-white text-sm">
-              J
-            </div>
+            <img src="/juke-digital-logo.png" alt="Juke Digital" className="w-8 h-8 rounded-lg object-contain" />
             <span className="text-xl font-bold">Juke Digital</span>
           </Link>
           <h1 className="text-2xl font-bold">Create your account</h1>

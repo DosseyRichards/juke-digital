@@ -46,9 +46,7 @@ function DashboardInner({ children }: { children: React.ReactNode }) {
         }`}
       >
         <div className="flex items-center gap-2 px-6 py-5 border-b border-[var(--border)]">
-          <div className="w-8 h-8 bg-[var(--primary)] rounded-lg flex items-center justify-center font-bold text-white text-sm">
-            J
-          </div>
+          <img src="/juke-digital-logo.png" alt="Juke Digital" className="w-8 h-8 rounded-lg object-contain" />
           <span className="text-lg font-bold">Juke Digital</span>
         </div>
 
