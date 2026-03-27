@@ -1,5 +1,10 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
+# env files
+.env.local
+.env*.local
+setup-db.sh
+
 # dependencies
 /node_modules
 /.pnp
