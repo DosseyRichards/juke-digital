@@ -289,8 +289,17 @@ export default function HomePage() {
       </nav>
 
       {/* ────────── 1. Hero ────────── */}
-      <section className="hero-gradient relative">
-        <div className="max-w-6xl mx-auto px-6 pt-20 pb-28 text-center">
+      <section className="relative overflow-hidden">
+        {/* Background image */}
+        <div className="absolute inset-0">
+          <img
+            src="https://images.unsplash.com/photo-1572116469696-31de0f17cc34?w=1920&q=80"
+            alt=""
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-[var(--background)]/90 via-[var(--background)]/80 to-[var(--background)]" />
+        </div>
+        <div className="relative max-w-6xl mx-auto px-6 pt-20 pb-28 text-center">
           <FadeIn>
             <div className="inline-block px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide uppercase bg-[var(--primary)]/10 text-[var(--primary)] border border-[var(--primary)]/20 mb-8">
               The #1 Bar Management Platform
@@ -552,6 +561,17 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ────────── Photo break ────────── */}
+      <section className="relative h-64 md:h-80 overflow-hidden">
+        <img
+          src="https://images.unsplash.com/photo-1470337458703-46ad1756a187?w=1920&q=80"
+          alt="Bar atmosphere"
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-[var(--background)] via-transparent to-[var(--background)]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[var(--background)] via-transparent to-[var(--background)]" />
+      </section>
+
       {/* ────────── 5. Feature showcase (alternating) ────────── */}
       <section className="py-24">
         <div className="max-w-6xl mx-auto px-6 space-y-32">
@@ -584,35 +604,38 @@ export default function HomePage() {
                   ))}
                 </ul>
               </div>
-              {/* Mini website mockup */}
-              <div className="rounded-xl border border-[var(--border)] overflow-hidden shadow-xl">
+              {/* Website mockup with real photo */}
+              <div className="rounded-xl border border-[var(--border)] overflow-hidden shadow-2xl">
                 <div className="bg-[var(--surface)] px-3 py-2 flex items-center gap-1.5 border-b border-[var(--border)]">
                   <span className="w-2.5 h-2.5 rounded-full bg-[#ef4444]" />
                   <span className="w-2.5 h-2.5 rounded-full bg-[#f59e0b]" />
                   <span className="w-2.5 h-2.5 rounded-full bg-[#22c55e]" />
+                  <div className="flex-1 mx-4">
+                    <div className="bg-[var(--background)] rounded-md px-3 py-1 text-[10px] text-[var(--muted)] text-center">mybar.jukedigital.com</div>
+                  </div>
                 </div>
-                <div
-                  className="p-6"
-                  style={{
-                    background:
-                      "linear-gradient(180deg, #1a1a2e 0%, #16213e 100%)",
-                  }}
-                >
-                  <div className="h-8 w-32 rounded bg-white/10 mb-4" />
-                  <div className="h-4 w-48 rounded bg-white/5 mb-2" />
-                  <div className="h-4 w-36 rounded bg-white/5 mb-6" />
-                  <div className="grid grid-cols-3 gap-3 mb-6">
-                    {[1, 2, 3].map((n) => (
-                      <div
-                        key={n}
-                        className="aspect-square rounded-lg"
-                        style={{
-                          background: `linear-gradient(135deg, rgba(99,102,241,${0.15 + n * 0.1}), rgba(139,92,246,${0.1 + n * 0.05}))`,
-                        }}
-                      />
+                <div className="relative">
+                  <img
+                    src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=800&q=80"
+                    alt="Bar website preview"
+                    className="w-full h-48 object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
+                  <div className="absolute bottom-4 left-4 right-4">
+                    <div className="text-white font-bold text-lg">The Midnight Lounge</div>
+                    <div className="text-white/60 text-xs mt-1">Craft cocktails & live music</div>
+                  </div>
+                </div>
+                <div className="p-4 bg-[#1a1a2e]">
+                  <div className="grid grid-cols-3 gap-2 mb-4">
+                    {["https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=200&q=80",
+                      "https://images.unsplash.com/photo-1470337458703-46ad1756a187?w=200&q=80",
+                      "https://images.unsplash.com/photo-1575444758702-4a6b9222c016?w=200&q=80"
+                    ].map((src, n) => (
+                      <img key={n} src={src} alt="" className="aspect-square rounded-lg object-cover" />
                     ))}
                   </div>
-                  <div className="h-10 rounded-lg bg-[var(--primary)]/30 flex items-center justify-center text-xs text-white/60">
+                  <div className="h-10 rounded-lg bg-[var(--primary)] flex items-center justify-center text-xs text-white font-medium">
                     Reserve a Table
                   </div>
                 </div>
@@ -853,8 +876,16 @@ export default function HomePage() {
       </section>
 
       {/* ────────── 7. Testimonials ────────── */}
-      <section className="py-24">
-        <div className="max-w-6xl mx-auto px-6">
+      <section className="py-24 relative overflow-hidden">
+        <div className="absolute inset-0">
+          <img
+            src="https://images.unsplash.com/photo-1566417713940-fe7c737a9ef2?w=1920&q=80"
+            alt=""
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-[var(--background)]/90" />
+        </div>
+        <div className="relative max-w-6xl mx-auto px-6">
           <FadeIn>
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
@@ -973,11 +1004,20 @@ export default function HomePage() {
           <FadeIn>
             <div
               className="rounded-2xl p-12 md:p-16 text-center relative overflow-hidden"
-              style={{
-                background:
-                  "linear-gradient(135deg, var(--primary) 0%, #7c3aed 50%, #a78bfa 100%)",
-              }}
             >
+              {/* Background image with gradient overlay */}
+              <img
+                src="https://images.unsplash.com/photo-1543007630-9710e4a00a20?w=1200&q=80"
+                alt=""
+                className="absolute inset-0 w-full h-full object-cover"
+              />
+              <div
+                className="absolute inset-0"
+                style={{
+                  background:
+                    "linear-gradient(135deg, rgba(99,102,241,0.85) 0%, rgba(124,58,237,0.85) 50%, rgba(167,139,250,0.80) 100%)",
+                }}
+              />
               {/* Subtle overlay pattern */}
               <div
                 className="absolute inset-0 opacity-10"
