@@ -13,6 +13,7 @@ export interface Venue {
   description: string;
   logo_url: string;
   website_theme: Record<string, string>;
+  custom_domain: string;
   owner_id: string;
 }
 

@@ -46,6 +46,7 @@ function SettingsInner() {
   const [venueForm, setVenueForm] = useState({
     name: "",
     slug: "",
+    custom_domain: "",
     address: "",
     phone: "",
     email: "",
@@ -105,6 +106,7 @@ function SettingsInner() {
       setVenueForm({
         name: activeVenue.name || "",
         slug: activeVenue.slug || "",
+        custom_domain: activeVenue.custom_domain || "",
         address: activeVenue.address || "",
         phone: activeVenue.phone || "",
         email: activeVenue.email || "",
@@ -129,7 +131,7 @@ function SettingsInner() {
   }, [loadPages]);
 
   const resetVenueForm = () => {
-    setVenueForm({ name: "", slug: "", address: "", phone: "", email: "", description: "" });
+    setVenueForm({ name: "", slug: "", custom_domain: "", address: "", phone: "", email: "", description: "" });
     setEditingVenueId(null);
   };
 
@@ -337,6 +339,7 @@ function SettingsInner() {
                       setVenueForm({
                         name: v.name || "",
                         slug: v.slug || "",
+                        custom_domain: v.custom_domain || "",
                         address: v.address || "",
                         phone: v.phone || "",
                         email: v.email || "",
@@ -379,6 +382,7 @@ function SettingsInner() {
                       setVenueForm({
                         name: activeVenue.name || "",
                         slug: activeVenue.slug || "",
+                        custom_domain: activeVenue.custom_domain || "",
                         address: activeVenue.address || "",
                         phone: activeVenue.phone || "",
                         email: activeVenue.email || "",
@@ -424,15 +428,60 @@ function SettingsInner() {
                 />
               </div>
               {venueForm.slug && (
-                <p className="text-xs mt-1" style={{ color: "var(--primary)" }}>
-                  Your site:{" "}
-                  <a href={`/site/${venueForm.slug}`} target="_blank" rel="noopener noreferrer" className="underline">
-                    localhost:3000/site/{venueForm.slug}
-                  </a>
-                </p>
+                <div className="mt-2 p-3 rounded-lg bg-[var(--background)] border border-[var(--border)] space-y-1.5">
+                  <p className="text-xs font-medium text-[var(--muted)]">Your venue URLs:</p>
+                  <p className="text-xs">
+                    <span className="text-[var(--muted)]">Subdomain: </span>
+                    <a
+                      href={`https://${venueForm.slug}.juke-digital.vercel.app`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[var(--primary)] underline"
+                    >
+                      {venueForm.slug}.juke-digital.vercel.app
+                    </a>
+                  </p>
+                  <p className="text-xs">
+                    <span className="text-[var(--muted)]">Direct: </span>
+                    <a
+                      href={`/site/${venueForm.slug}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[var(--primary)] underline"
+                    >
+                      juke-digital.vercel.app/site/{venueForm.slug}
+                    </a>
+                  </p>
+                  {venueForm.custom_domain && (
+                    <p className="text-xs">
+                      <span className="text-[var(--muted)]">Custom: </span>
+                      <a
+                        href={`https://${venueForm.custom_domain}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-[var(--primary)] underline"
+                      >
+                        {venueForm.custom_domain}
+                      </a>
+                    </p>
+                  )}
+                </div>
               )}
               <p className="text-xs text-[var(--muted)] mt-1">
                 Unique URL for your public website. Lowercase letters, numbers, and hyphens only.
+              </p>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium mb-1">Custom Domain (optional)</label>
+              <input
+                value={venueForm.custom_domain}
+                onChange={(e) => setVenueForm({ ...venueForm, custom_domain: e.target.value.toLowerCase().trim() })}
+                placeholder="www.mybar.com"
+                className="w-full"
+              />
+              <p className="text-xs text-[var(--muted)] mt-1">
+                Point your domain&apos;s DNS to Vercel, then add it in your Vercel project settings.
               </p>
             </div>
 
