@@ -224,9 +224,13 @@ export default function HomePage() {
   };
 
   return (
-    <div className="min-h-screen bg-[var(--background)] text-[var(--foreground)] overflow-x-hidden">
-      {/* ────────── Animated gradient background (hero) ────────── */}
+    <div className="landing min-h-screen bg-[var(--background)] text-[var(--foreground)] overflow-x-hidden" style={{ fontFamily: "var(--font-body), sans-serif" }}>
+      {/* ────────── Fonts + Animated gradient background (hero) ────────── */}
       <style>{`
+        .landing h1, .landing h2, .landing h3, .landing h4 {
+          font-family: var(--font-display), sans-serif;
+          letter-spacing: -0.03em;
+        }
         @keyframes gradientShift {
           0%   { background-position: 0% 50%; }
           50%  { background-position: 100% 50%; }
