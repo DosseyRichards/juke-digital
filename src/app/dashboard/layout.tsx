@@ -13,6 +13,7 @@ const navItems = [
   { href: "/dashboard/sms", label: "SMS", icon: "💬" },
   { href: "/dashboard/team", label: "Team", icon: "👥" },
   { href: "/dashboard/customers", label: "Customers", icon: "🗂️" },
+  { href: "/dashboard/analytics", label: "Analytics", icon: "📈" },
   { href: "/dashboard/settings", label: "Settings", icon: "⚙️" },
 ];
 

@@ -22,6 +22,7 @@ interface PageData {
   slug: string;
   content: WebsiteBlock[];
   is_published: boolean;
+  meta_description?: string;
 }
 
 interface VenueData {
@@ -42,6 +43,41 @@ interface VenueData {
 }
 
 /* ------------------------------------------------------------------ */
+/*  Scroll to Top (local to this file since it's not exported)         */
+/* ------------------------------------------------------------------ */
+
+function ScrollToTop({ theme }: { theme: NonNullable<VenueData["website_theme"]> }) {
+  const [show, setShow] = useState(false);
+  const t = theme;
+
+  useEffect(() => {
+    const onScroll = () => setShow(window.scrollY > 500);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  if (!show) return null;
+
+  return (
+    <button
+      onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+      className="fixed bottom-6 right-6 z-50 w-12 h-12 rounded-full flex items-center justify-center shadow-lg transition-all duration-300 hover:scale-110"
+      style={{
+        backgroundColor: t.primaryColor,
+        color: "#fff",
+        opacity: show ? 1 : 0,
+        transform: show ? "translateY(0)" : "translateY(20px)",
+      }}
+      aria-label="Scroll to top"
+    >
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+        <polyline points="18 15 12 9 6 15" />
+      </svg>
+    </button>
+  );
+}
+
+/* ------------------------------------------------------------------ */
 /*  Component                                                          */
 /* ------------------------------------------------------------------ */
 
@@ -57,7 +93,6 @@ export default function VenueSubPage() {
 
   useEffect(() => {
     async function load() {
-      // Load venue
       const { data: venueData } = await supabase
         .from("venues")
         .select("id, name, phone, email, address, description, slug, website_theme")
@@ -71,10 +106,9 @@ export default function VenueSubPage() {
 
       setVenue(venueData);
 
-      // Load all published pages
       const { data: pagesData } = await supabase
         .from("website_pages")
-        .select("id, title, slug, content, is_published")
+        .select("id, title, slug, content, is_published, meta_description")
         .eq("venue_id", venueData.id)
         .eq("is_published", true)
         .order("sort_order");
@@ -94,13 +128,35 @@ export default function VenueSubPage() {
     load();
   }, [venueSlug, pageSlug, supabase]);
 
+  /* Meta tags */
+  useEffect(() => {
+    if (venue && activePage) {
+      document.title = `${activePage.title} | ${venue.name}`;
+      const metaDesc = document.querySelector('meta[name="description"]');
+      const desc = activePage.meta_description || venue.description || "";
+      if (metaDesc) {
+        metaDesc.setAttribute("content", desc);
+      } else if (desc) {
+        const meta = document.createElement("meta");
+        meta.name = "description";
+        meta.content = desc;
+        document.head.appendChild(meta);
+      }
+    }
+  }, [venue, activePage]);
+
   if (notFound) {
     return (
       <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: "#0f0f13", color: "#f0f0f5" }}>
         <div className="text-center">
-          <h1 className="text-5xl font-bold mb-3">404</h1>
-          <p className="text-lg opacity-60 mb-6">This page could not be found.</p>
-          <a href={`/site/${venueSlug}`} className="text-sm underline opacity-60 hover:opacity-100">Back to homepage</a>
+          <h1 className="text-7xl font-bold mb-4 opacity-20">404</h1>
+          <p className="text-xl opacity-60 mb-8">This page could not be found.</p>
+          <a
+            href={`/site/${venueSlug}`}
+            className="inline-block px-6 py-3 rounded-lg text-sm font-medium border border-white/20 hover:bg-white/10 transition"
+          >
+            Back to homepage
+          </a>
         </div>
       </div>
     );
@@ -109,9 +165,9 @@ export default function VenueSubPage() {
   if (!venue || !activePage) {
     return (
       <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: "#0f0f13", color: "#f0f0f5" }}>
-        <div className="flex items-center gap-3">
-          <div className="w-5 h-5 border-2 border-current border-t-transparent rounded-full animate-spin" />
-          <span className="opacity-60">Loading...</span>
+        <div className="flex flex-col items-center gap-4">
+          <div className="w-8 h-8 border-2 border-current border-t-transparent rounded-full animate-spin opacity-40" />
+          <span className="text-sm opacity-40 tracking-wide">Loading...</span>
         </div>
       </div>
     );
@@ -126,19 +182,17 @@ export default function VenueSubPage() {
   };
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: t.backgroundColor, color: t.textColor, fontFamily: t.fontFamily }}>
-      {/* Navigation */}
+    <div className="min-h-screen" style={{ backgroundColor: t.backgroundColor, color: t.textColor, fontFamily: t.fontFamily, scrollBehavior: "smooth" }}>
+      <style>{`html { scroll-behavior: smooth; }`}</style>
+
       <SiteNav venue={venue} pages={pages} activePage={activePage} theme={t} venueSlug={venueSlug} />
 
-      {/* Blocks */}
-      {activePage.content.map((block) => (
-        <div key={block.id}>
-          <RenderBlock block={block} theme={t} venueId={venue.id} />
-        </div>
+      {activePage.content.map((block, idx) => (
+        <RenderBlock key={block.id} block={block} theme={t} venueId={venue.id} blockIndex={idx} />
       ))}
 
-      {/* Footer */}
       <SiteFooter venue={venue} theme={t} />
+      <ScrollToTop theme={t} />
     </div>
   );
 }

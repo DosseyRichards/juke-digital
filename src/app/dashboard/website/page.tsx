@@ -1981,8 +1981,9 @@ export default function WebsiteBuilderPage() {
                 ref={previewRef}
                 className="rounded-xl border border-[var(--border)] overflow-hidden shadow-2xl transition-all duration-300 flex-shrink-0 self-start"
                 style={{
-                  width: viewportWidth,
-                  maxWidth: "100%",
+                  width: viewportMode === "desktop" ? "100%" : viewportWidth,
+                  maxWidth: viewportMode === "desktop" ? "100%" : viewportWidth,
+                  minWidth: viewportMode !== "desktop" ? viewportWidth : undefined,
                   backgroundColor: theme.backgroundColor,
                   color: theme.textColor,
                   fontFamily: theme.fontFamily,
