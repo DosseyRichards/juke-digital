@@ -7,6 +7,7 @@ const APP_DOMAINS = [
   'localhost',
   '127.0.0.1',
   'juke-digital.vercel.app',
+  'juke-digital-b64k.vercel.app',
 ]
 
 function isAppDomain(hostname: string): boolean {
