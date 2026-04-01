@@ -1098,15 +1098,19 @@ export default function HomePage() {
             <div>
               <h4 className="font-semibold text-sm mb-4">Company</h4>
               <ul className="space-y-2 text-sm text-[var(--muted)]">
-                {["About", "Blog", "Careers", "Contact", "Partners"].map(
-                  (item) => (
-                    <li key={item}>
-                      <a href="#" className="hover:text-white transition">
-                        {item}
-                      </a>
-                    </li>
-                  )
-                )}
+                {[
+                  { label: "About", href: "/about" },
+                  { label: "Blog", href: "/blog" },
+                  { label: "Careers", href: "/careers" },
+                  { label: "Contact", href: "/contact" },
+                  { label: "Partners", href: "/contact" },
+                ].map((item) => (
+                  <li key={item.label}>
+                    <Link href={item.href} className="hover:text-white transition">
+                      {item.label}
+                    </Link>
+                  </li>
+                ))}
               </ul>
             </div>
 
@@ -1115,15 +1119,15 @@ export default function HomePage() {
               <h4 className="font-semibold text-sm mb-4">Legal</h4>
               <ul className="space-y-2 text-sm text-[var(--muted)]">
                 {[
-                  "Privacy Policy",
-                  "Terms of Service",
-                  "Cookie Policy",
-                  "GDPR",
+                  { label: "Privacy Policy", href: "/privacy" },
+                  { label: "Terms of Service", href: "/terms" },
+                  { label: "Cookie Policy", href: "/cookies" },
+                  { label: "GDPR", href: "/gdpr" },
                 ].map((item) => (
-                  <li key={item}>
-                    <a href="#" className="hover:text-white transition">
-                      {item}
-                    </a>
+                  <li key={item.label}>
+                    <Link href={item.href} className="hover:text-white transition">
+                      {item.label}
+                    </Link>
                   </li>
                 ))}
               </ul>
