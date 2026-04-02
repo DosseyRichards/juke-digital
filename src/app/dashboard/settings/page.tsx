@@ -429,32 +429,24 @@ function SettingsInner() {
               </div>
               {venueForm.slug && (
                 <div className="mt-2 p-3 rounded-lg bg-[var(--background)] border border-[var(--border)] space-y-1.5">
-                  <p className="text-xs font-medium text-[var(--muted)]">Your venue URLs:</p>
-                  <p className="text-xs">
-                    <span className="text-[var(--muted)]">Subdomain: </span>
-                    <a
-                      href={`https://${venueForm.slug}.juke-digital.vercel.app`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-[var(--primary)] underline"
-                    >
-                      {venueForm.slug}.juke-digital.vercel.app
-                    </a>
-                  </p>
-                  <p className="text-xs">
-                    <span className="text-[var(--muted)]">Direct: </span>
-                    <a
-                      href={`/site/${venueForm.slug}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-[var(--primary)] underline"
-                    >
-                      juke-digital.vercel.app/site/{venueForm.slug}
-                    </a>
-                  </p>
+                  <p className="text-xs font-medium text-[var(--muted)]">Your venue website:</p>
+                  <a
+                    href={`/site/${venueForm.slug}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 px-3 py-2 rounded-lg bg-[var(--primary)]/10 border border-[var(--primary)]/20 hover:bg-[var(--primary)]/20 transition"
+                  >
+                    <svg className="w-4 h-4 text-[var(--primary)] flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+                    </svg>
+                    <span className="text-sm font-medium text-[var(--primary)]">/site/{venueForm.slug}</span>
+                    <svg className="w-3 h-3 text-[var(--primary)] ml-auto flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
+                  </a>
                   {venueForm.custom_domain && (
                     <p className="text-xs">
-                      <span className="text-[var(--muted)]">Custom: </span>
+                      <span className="text-[var(--muted)]">Custom domain: </span>
                       <a
                         href={`https://${venueForm.custom_domain}`}
                         target="_blank"
